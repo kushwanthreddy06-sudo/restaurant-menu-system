@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Successful</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+    <h2>🍽️ Foodie's Restaurant</h2>
+</header>
+
+<div class="success-box">
+
+    <h1>🎉 Order Placed Successfully!</h1>
+
+    <h2>Thank You for Ordering!</h2>
+
+    <div id="order-details"></div>
+
+    <a href="menu.html" class="btn">Order More Food</a>
+
+    <a href="index.html" class="btn">Go Home</a>
+
+</div>
+
+<script>
+
+const order = JSON.parse(
+    localStorage.getItem("lastOrder")
+);
+
+const details = document.getElementById("order-details");
+
+if (order) {
+
+    function addDetail(label, value) {
+        const p = document.createElement("p");
+        const strong = document.createElement("strong");
+        strong.textContent = label + ": ";
+        p.append(strong, document.createTextNode(value));
+        details.appendChild(p);
+    }
+
+    addDetail("Order ID", order.orderId);
+    addDetail("Customer", order.customer);
+    addDetail("Mobile", order.mobile);
+    addDetail("Total Amount", "₹" + order.total);
+    addDetail("Payment Method", order.paymentMethod);
+    addDetail("Status", order.status);
+
+} else {
+
+    details.textContent = "No recent order found.";
+
+}
+
+</script>
+
+</body>
+</html>
